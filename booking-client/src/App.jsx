@@ -1,14 +1,12 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { Routes,Route } from 'react-router-dom'
 import './App.css'
+import IndexPage from './pages/indexPage'
 
 function App() {
- 
+  return <Routes>
+    <Route index element={<IndexPage/>} />
 
-  return (
-    <div className="text-3xl font-bold underline">test
-    </div>
-  )
+  </Routes>
 }
 
 export default App
