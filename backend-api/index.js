@@ -63,7 +63,6 @@ app.get("/profile", async(req,res)=>{
             jwt.verify(token, jwtSecret,{},async(err,userData)=>{
                 if(err) throw(err)
                 const {name, email,id} = await User.findById(userData.id);
-                console.log(name,email,id)
                 res.json({name, email,id}) 
             })
         }else{
@@ -72,6 +71,10 @@ app.get("/profile", async(req,res)=>{
     }catch(err){
         res.status(401).send(err)
     }
+})
+
+app.post("/logout", async(req,res)=>{
+    res.cookie('token', '').json(true)
 })
 
 app.listen(4000,()=>{
