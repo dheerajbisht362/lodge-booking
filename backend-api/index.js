@@ -7,12 +7,14 @@ const jwt = require("jsonwebtoken")
 var cookieParser = require('cookie-parser')
 const app = express();
 require('dotenv').config()
+const imageDownloader = require("image-downloader")
 
 const bcryptSalt = bcrypt.genSaltSync(8)
 const jwtSecret = "secretJWTtokenadsfdsf"
 
 app.use(express.json())
 app.use(cookieParser())
+app.use('/uploads',express.static(__dirname + '/uploads'))
 app.use(cors({
     credentials:true,
     origin: 'http://localhost:5173/',
@@ -75,6 +77,21 @@ app.get("/profile", async(req,res)=>{
 
 app.post("/logout", async(req,res)=>{
     res.cookie('token', '').json(true)
+})
+
+app.post("/upload-by-link", async(req,res)=>{
+    try{
+        const {link} = req.body;
+        const newName = "/photo" +Date.now() + '.jpg';
+        await imageDownloader.image({
+            url:link,
+            dest: __dirname + "/uploads" + newName,
+        })
+        res.json(newName)
+    }catch(err){
+        console.log(err)
+        res.status(422).json(err)
+    }
 })
 
 app.listen(4000,()=>{
