@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Perks from "../perks";
+import Perks from "../components/perks";
 
 export default function PlacesPage(){
 
