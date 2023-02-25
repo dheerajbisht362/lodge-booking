@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
 import { Link, Navigate, useParams } from "react-router-dom"
-import { UserContext } from "../UserContext"
+import { UserContext } from "../Contexts/UserContext"
 import PlacesPage from "./PlacesPage"
 
 export default function AccountPage(){

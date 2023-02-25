@@ -48,6 +48,20 @@ export default function PlacesPage(){
         setPhotoLink("")
     }
 
+    function uploadPhoto(e){
+        const files = e.target.files;
+        const data = new FormData();
+        for(let i=0; i<files.length; i++){
+            data.append("photos", files[i])
+        }
+        axios.post("/upload",data,{
+            headers: {"Content-Type": "multipart/form-data"}
+        }).then(res=>{
+            const {data:filename} = res;
+            console.log(filename)
+        })
+    }
+
     return (
         <div>
             {action !== 'new' && 
@@ -78,7 +92,10 @@ export default function PlacesPage(){
                                     <img className="rounded-2xl" src={"http://localhost:4000/uploads"+link} alt="" />
                                 </div>   
                             ))}
-                            <button className="flex items-center gap-1 justify-center border bg-transparent rounded-2xl p-2 text-2xl text-gray-600">Upload </button>
+                            <label className="cursor-pointer flex items-center gap-1 justify-center border bg-transparent rounded-2xl p-2 text-2xl text-gray-600">
+                                <input onChange={uploadPhoto} multiple type="file" className="hidden" />
+                                Upload 
+                            </label>
                         </div>
                         {preInput("Desciption", "description to the place")}
                         <textarea value={description} onChange={e=>setDescription(e.target.value)}  className="" type="text" placeholder="Address" ></textarea>
