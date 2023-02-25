@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Perks from "../components/perks";
+import PhotosUploader from "../components/PhotosUploader";
 
 export default function PlacesPage(){
 
@@ -10,7 +11,6 @@ export default function PlacesPage(){
     const [title,setTitle] = useState('');
     const [address,setAddress] = useState('');
     const [addedPhotos,setAddedPhotos] = useState([]);
-    const [photoLink, setPhotoLink] = useState('')
     const [description,setDescription] = useState('');
     const [perks,setPerks] = useState([]);
     const [extraInfo,setExtraInfo] = useState('');
@@ -39,29 +39,6 @@ export default function PlacesPage(){
         );
     }
 
-    async function addPhotoByLink(e){
-        e.preventDefault()
-        const {data:filename} =  await axios.post("/upload-by-link", {link:photoLink})
-        setAddedPhotos(prev=>{
-            return [...prev, filename]
-        })
-        setPhotoLink("")
-    }
-
-    function uploadPhoto(e){
-        const files = e.target.files;
-        const data = new FormData();
-        for(let i=0; i<files.length; i++){
-            data.append("photos", files[i])
-        }
-        axios.post("/upload",data,{
-            headers: {"Content-Type": "multipart/form-data"}
-        }).then(res=>{
-            const {data:filename} = res;
-            console.log(filename)
-        })
-    }
-
     return (
         <div>
             {action !== 'new' && 
@@ -82,21 +59,7 @@ export default function PlacesPage(){
                         {preInput("Address", "Address to this place")}
                         <input type="text" value={address} onChange={e=>setAddress(e.target.value)}  placeholder="Address" />
                         {preInput("Photos", "more = better")}
-                        <div className="flex gap-2">
-                            <input value={photoLink} onChange={e=>setPhotoLink(e.target.value)}  type="text" placeholder="Add using a link ....." />
-                            <button onClick={addPhotoByLink}  className="bg-grey-200 grow px-4 rounded-2xl" >Add&nbsp; photo</button>
-                        </div>
-                        <div className="mt-2 grid gap-2 grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-                            {addedPhotos.length >0 && addedPhotos.map(link=>(
-                                <div key={link}>
-                                    <img className="rounded-2xl" src={"http://localhost:4000/uploads"+link} alt="" />
-                                </div>   
-                            ))}
-                            <label className="cursor-pointer flex items-center gap-1 justify-center border bg-transparent rounded-2xl p-2 text-2xl text-gray-600">
-                                <input onChange={uploadPhoto} multiple type="file" className="hidden" />
-                                Upload 
-                            </label>
-                        </div>
+                        <PhotosUploader addedPhotos={addedPhotos} onChange={setAddedPhotos}/>
                         {preInput("Desciption", "description to the place")}
                         <textarea value={description} onChange={e=>setDescription(e.target.value)}  className="" type="text" placeholder="Address" ></textarea>
                         {preInput("Perks", "select all the perks")}
