@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Navigate, redirect } from "react-router-dom";
 import AccountNav from "./AccountNav";
 import PhotosUploader from "./PhotosUploader";
 
@@ -30,7 +31,7 @@ export default function PlacesFormPage(){
         const placeData = {title,address, addedPhotos, description, perks, extraInfo, checkIn, checkOut, maxGuests}
         await axios.post("/places",placeData)
 
-        // setRedirect("/account/places")
+        setRedirect(true)
     }
 
     function inputHeader(text) {
@@ -42,6 +43,10 @@ export default function PlacesFormPage(){
         return (
           <p className="text-gray-500 text-sm">{text}</p>
         );
+    }
+
+    if(redirect){
+        return <Navigate to={"/account/places"}/>
     }
 
     return <div>
