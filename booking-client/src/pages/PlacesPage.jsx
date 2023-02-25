@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom";
 import AccountNav from "../components/AccountNav";
-import PlacesFormPage from "../components/PlacesFormPage";
 
 export default function PlacesPage(){
 

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Routes,Route } from 'react-router-dom'
 import './App.css'
-import PlacesFormPage from './components/PlacesFormPage'
+import PlacesFormPage from './pages/PlacesFormPage'
 import { UserContextProvider } from './Contexts/UserContext'
 import Layout from './Layout'
 import AccountPage from './pages/AccountPage'

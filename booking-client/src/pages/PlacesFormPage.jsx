@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Navigate, redirect } from "react-router-dom";
-import AccountNav from "./AccountNav";
-import PhotosUploader from "./PhotosUploader";
+import AccountNav from "../components/AccountNav";
+import PhotosUploader from "../components/PhotosUploader";
 
 
 export default function PlacesFormPage(){
