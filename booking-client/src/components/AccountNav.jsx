@@ -10,10 +10,10 @@ export default function AccountNav(){
         
         let classes =  'py-2 px-6 inline-flex gap-1 ';
 
-        if (type === subpage){
-            classes += "bg-primary text-white rounded-full"
-        }else{
+        if (type !== subpage){
             classes += "bg-gray-200"
+        }else{
+            classes += "bg-primary text-white rounded-full"
         }
         return classes
     }
