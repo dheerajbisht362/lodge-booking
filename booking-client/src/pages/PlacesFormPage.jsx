@@ -16,6 +16,7 @@ export default function PlacesFormPage(){
     const [checkOut,setCheckOut] = useState('');
     const [maxGuests,setMaxGuests] = useState(1);
     const [price,setPrice] = useState(100);
+    const [redirect,setRedirect] = useState(false);
 
     function preInput(header,description) {
         return (
@@ -28,7 +29,7 @@ export default function PlacesFormPage(){
 
     async function addNewPlace(e){
         e.preventDefault();
-        const placeData = {title,address, addedPhotos, description, perks, extraInfo, checkIn, checkOut, maxGuests}
+        const placeData = {title,address, photos:addedPhotos, description, perks, extraInfo, checkIn, checkOut, maxGuests}
         await axios.post("/places",placeData)
 
         setRedirect(true)
