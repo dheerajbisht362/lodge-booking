@@ -35,6 +35,7 @@ export default function PlacesFormPage(){
             setCheckIn(data.checkIn);
             setCheckOut(data.checkOut);
             setMaxGuests(data.maxGuests);
+            setPrice(data.price)
         })
     },[id])
 
@@ -94,7 +95,7 @@ export default function PlacesFormPage(){
                     {preInput("Extra info", "house rules, etc")}
                     <textarea value={extraInfo} onChange={e=>setExtraInfo(e.target.value)}  className="" type="text" placeholder="Address" ></textarea>
                     {preInput("Check in&out", "add check in and out times, remember to have extra time for cleaning")}
-                    <div className="grid gap-2 sm:gird-cols-3">
+                    <div className="grid gap-2 gird-cols-2 md:grid-cols-4">
                         <div>
                             <h3 className="m-2 -mb-1 ">Check in time</h3>
                             <input value={checkIn} onChange={e=>setCheckIn(e.target.value)}  type='text' placeholder="14:00"/>
@@ -106,6 +107,10 @@ export default function PlacesFormPage(){
                         <div>
                             <h3 className="m-2 -mb-1 ">Max number of guest</h3>
                             <input value={maxGuests} onChange={e=>setMaxGuests(e.target.value)}  type='text'/>
+                        </div>
+                        <div>
+                            <h3 className="m-2 -mb-1 ">Price per night</h3>
+                            <input value={price} onChange={e=>setPrice(e.target.value)}  type='text'/>
                         </div>
                     </div>
                     <button className="primary my-4" >Save</button>
