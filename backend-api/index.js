@@ -165,5 +165,5 @@ app.get("/places", async(req,res)=>{
 })
 
 app.listen(4000,()=>{
-    console.log("Listening to port")
+    console.log("Listening to port 4000")
 });

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Navigate, redirect, useParams } from "react-router-dom";
 import AccountNav from "../components/AccountNav";
+import Perks from "../components/Perks";
 import PhotosUploader from "../components/PhotosUploader";
 
 
